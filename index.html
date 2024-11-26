@@ -3,93 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown Seite</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: black;
-      color: #E6E6FA; /* Flieder */
-      font-family: Arial, sans-serif;
-    }
-
-    .container {
-      text-align: center;
-      position: relative;
-    }
-
-    .ascii-wheel {
-      position: absolute;
-      left: -100px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: translateY(-50%) rotate(0deg); }
-      100% { transform: translateY(-50%) rotate(360deg); }
-    }
-
-    .countdown {
-      font-weight: bold;
-      font-size: 2rem;
-    }
-
-    audio {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-    }
-  </style>
+  <title>Countdown</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <div class="ascii-wheel">|/-\\</div>
-
-  <script>
-      const wheel = document.querySelector('.ascii-wheel');
-        const wheelChars = ['|', '/', '-', '\\'];
-        let index = 0;
-
-        setInterval(() => {
-            wheel.textContent = wheelChars[index];
-            index = (index + 1) % wheelChars.length;
-        }, 200); // Change every 200ms</script>
-    
-    <div id="countdown" class="countdown">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
+    <div class="spinner">⟳</div>
+    <div class="countdown">
+      <p><span class="countdown-text">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</span></p>
+    </div>
   </div>
-
-  <audio controls autoplay loop>
+  <audio autoplay loop>
     <source src="1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+    Your browser does not support the audio tag.
   </audio>
-
-  <script>
-    const countdownEl = document.getElementById("countdown");
-    const baseText = "⚠️⏳🤐";
-    const endText = "☎️💔";
-
-    function updateCountdown() {
-      const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(0, 0, 0, 0);
-
-      const msInDay = 24 * 60 * 60 * 1000;
-      const daysPassed = Math.floor((now - midnight) / msInDay);
-      
-      const totalBars = 30;
-      const barsLeft = Math.max(totalBars - daysPassed, 0);
-      countdownEl.textContent = baseText + "▬".repeat(barsLeft) + endText;
-    }
-
-    // Update immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
