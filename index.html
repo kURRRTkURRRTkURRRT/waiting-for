@@ -63,6 +63,19 @@
 
 
     <div class="countdown" id="countdown">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>       
+     <audio id="background-audio" muted autoplay loop>
+    <source src="1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+    
+ <script>
+    // Sicherstellen, dass das Audio nach 1 Sekunde starten kann
+    window.onload = function() {
+      var audio = document.getElementById("background-audio");
+      audio.muted = false; // Audio nach Laden der Seite aktivieren
+      audio.play(); // Startet die Wiedergabe
+    };
+ </script>
     <div class="statistics" id="statistics">
         Bereits gewartet: 0 Tage, 0 Stunden <br>
         Verbleibende Zeit: 25 Tage, 0 Stunden
@@ -102,18 +115,6 @@
         setInterval(updateCountdown, 1000); // Alle 1 Sekunde
         updateCountdown(); // Initialer Aufruf
     </script>
-    <audio id="background-audio" muted autoplay loop>
-    <source src="1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-    
- <script>
-    // Sicherstellen, dass das Audio nach 1 Sekunde starten kann
-    window.onload = function() {
-      var audio = document.getElementById("background-audio");
-      audio.muted = false; // Audio nach Laden der Seite aktivieren
-      audio.play(); // Startet die Wiedergabe
-    };
- </script>
+
 </body>
 </html>
