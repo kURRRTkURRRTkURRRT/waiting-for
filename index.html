@@ -1,76 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waiting for... (the daily updater)</title>
-    <style>
-        body {
-            background-color: black;
-            color: #dda0dd;
-            font-family: monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        .container {
-            display: flex;
-            align-items: center;
-        }
-        .ascii-wheel {
-            font-size: 20px;
-            margin-right: 20px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        #daily-text {
-            font-size: 24px;
-        }
-        audio {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Seite</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+      color: #E6E6FA; /* Flieder */
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    .ascii-wheel {
+      position: absolute;
+      left: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .countdown {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    audio {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Waiting for... (the daily updater)</h1>
-    <div class="container">
-        <div class="ascii-wheel">|/-\</div>
-        <div id="daily-text">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
-    </div>
-    <audio autoplay loop>
-        <source src="1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+  <div class="container">
+    <div class="ascii-wheel">|/-\\</div>
+    <div id="countdown" class="countdown">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
+  </div>
 
-    <script>
-        // Daily updater logic
-        const startDate = new Date('2024-11-26'); // Start date
-        const today = new Date();
-        const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-        const fullText = '⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔';
-        const textElement = document.getElementById('daily-text');
+  <audio controls autoplay loop>
+    <source src="your-audio-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-        const updatedText = fullText.slice(0, fullText.length - daysPassed);
-        textElement.textContent = updatedText;
+  <script>
+    const countdownEl = document.getElementById("countdown");
+    const baseText = "⚠️⏳🤐";
+    const endText = "☎️💔";
 
-        // ASCII wheel rotation logic
-        const wheel = document.querySelector('.ascii-wheel');
-        const wheelChars = ['|', '/', '-', '\\'];
-        let index = 0;
+    function updateCountdown() {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(0, 0, 0, 0);
 
-        setInterval(() => {
-            wheel.textContent = wheelChars[index];
-            index = (index + 1) % wheelChars.length;
-        }, 200); // Change every 200ms
-    </script>
+      const msInDay = 24 * 60 * 60 * 1000;
+      const daysPassed = Math.floor((now - midnight) / msInDay);
+      
+      const totalBars = 30;
+      const barsLeft = Math.max(totalBars - daysPassed, 0);
+      countdownEl.textContent = baseText + "▬".repeat(barsLeft) + endText;
+    }
+
+    // Update immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
