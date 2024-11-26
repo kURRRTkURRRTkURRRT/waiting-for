@@ -50,6 +50,17 @@
 <body>
   <div class="container">
     <div class="ascii-wheel">|/-\\</div>
+
+  <script>
+      const wheel = document.querySelector('.ascii-wheel');
+        const wheelChars = ['|', '/', '-', '\\'];
+        let index = 0;
+
+        setInterval(() => {
+            wheel.textContent = wheelChars[index];
+            index = (index + 1) % wheelChars.length;
+        }, 200); // Change every 200ms</script>
+    
     <div id="countdown" class="countdown">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
   </div>
 
