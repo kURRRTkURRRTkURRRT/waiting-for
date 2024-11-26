@@ -66,8 +66,11 @@
         Bereits gewartet: 0 Tage, 0 Stunden <br>
         Verbleibende Zeit: 25 Tage, 0 Stunden
     </div>
-
-    <iframe src="https://github.com/kURRRTkURRRTkURRRT/waiting-for/1.mp3" autoplay loop></iframe>
+    
+  <audio autoplay loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
 
     <script>
         const countdownElement = document.getElementById('countdown');
@@ -75,7 +78,7 @@
 
         // Countdown-Daten
         const startDate = new Date("November 26, 2024 00:00:00");
-        const endDate = new Date("December 21, 2024 00:00:00");
+        const endDate = new Date("December 21, 2024 19:00:00");
         const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
         const totalBars = "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"; // Startbalken
 
