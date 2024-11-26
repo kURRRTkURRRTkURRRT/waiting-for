@@ -69,9 +69,9 @@
         }
         .cube-face {
             position: absolute;
-            width: 65px;
-            height: 65px;
-            background: rgba(155, 033, 250, 0.6);
+            width: 50px;
+            height: 50px;
+            background: rgba(155, 083, 250, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -173,9 +173,9 @@ happy bday! <h2>♥LEOS♥</h2><br>
                     cube.style.opacity = 0; // blendet den Würfel aus (Explosionseffekt)
                     setTimeout(() => {
                         cube.remove(); // Entferne den Würfel nach der Explosion
-                    }, 500);
+                    }, 200);
                 }
-            }, 1000);
+            }, 500);
 
             return cube;
         }
