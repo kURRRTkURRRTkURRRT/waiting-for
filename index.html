@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiting for... (the daily updater)</title>
+    <style>
+        body {
+            background-color: black;
+            color: #dda0dd;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        .ascii-wheel {
+            font-size: 20px;
+            margin-right: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #daily-text {
+            font-size: 24px;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waiting for... (the daily updater)</h1>
+    <div class="container">
+        <div class="ascii-wheel">|/-\</div>
+        <div id="daily-text">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
+    </div>
+    <audio autoplay loop>
+        <source src="1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Daily updater logic
+        const startDate = new Date('2024-01-01'); // Start date
+        const today = new Date();
+        const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+        const fullText = '⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔';
+        const textElement = document.getElementById('daily-text');
+
+        const updatedText = fullText.slice(0, fullText.length - daysPassed);
+        textElement.textContent = updatedText;
+
+        // ASCII wheel rotation logic
+        const wheel = document.querySelector('.ascii-wheel');
+        const wheelChars = ['|', '/', '-', '\\'];
+        let index = 0;
+
+        setInterval(() => {
+            wheel.textContent = wheelChars[index];
+            index = (index + 1) % wheelChars.length;
+        }, 200); // Change every 200ms
+    </script>
+</body>
+</html>
