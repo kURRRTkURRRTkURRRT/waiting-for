@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,7 +143,7 @@ happy bday! ♥LEOS♥<br>
             ["front", "back", "right", "left", "top", "bottom"].forEach(face => {
                 const cubeFace = document.createElement("div");
                 cubeFace.className = "cube-face " + face;
-                cubeFace.innerText = "♥LEOS♥";
+                cubeFace.innerText = "Test";
                 cube.appendChild(cubeFace);
             });
 
@@ -150,7 +151,7 @@ happy bday! ♥LEOS♥<br>
 
             // Zufällige Explosionseffekte
             setInterval(() => {
-                if (Math.random() < 0.ß) { // 10% Chance für eine Explosion
+                if (Math.random() < 0.1) { // 10% Chance für eine Explosion
                     cube.style.animation = "none"; // stoppe die Rotation
                     cube.style.opacity = 0; // blendet den Würfel aus (Explosionseffekt)
                     setTimeout(() => {
@@ -164,7 +165,7 @@ happy bday! ♥LEOS♥<br>
 
         // Würfel zu den Ebenen hinzufügen
         document.querySelectorAll(".layer").forEach(layer => {
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < 10; i++) {
                 createCube(layer);
             }
         });
