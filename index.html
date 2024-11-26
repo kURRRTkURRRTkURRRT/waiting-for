@@ -121,12 +121,26 @@ happy bday! ♥LEOS♥<br>
         <div class="layer" id="layer3"></div>
     </div>
 
-<audio autoplay loop>
-    <source src="https://kurrrtkurrrtkurrrt.github.io/waiting-for/1.mp3" type="audio/mp3">
-    Ihr Browser unterstützt keine Audiodateien.
-</audio>
-    
+    <!-- Musik Button -->
+    <button id="playMusicBtn">Musik starten</button>
+
+    <!-- Audio-Element (versteckt bis Button geklickt wird) -->
+    <audio id="audio" loop>
+        <source src="https://kurrrtkurrrtkurrrt.github.io/waiting-for/1.mp3" type="audio/mp3">
+        Ihr Browser unterstützt keine Audiodateien.
+    </audio>
+
     <script>
+        // Musik starten, wenn der Button geklickt wird
+        const playMusicBtn = document.getElementById('playMusicBtn');
+        const audio = document.getElementById('audio');
+
+        playMusicBtn.addEventListener('click', function() {
+            audio.play();  // Musik abspielen
+            playMusicBtn.style.display = 'none';  // Button ausblenden, wenn Musik gestartet wird
+        });
+    
+    
         // Countdown-Daten
         const startDate = new Date("November 26, 2024 00:00:00");
         const endDate = new Date("December 21, 2024 19:00:00");
