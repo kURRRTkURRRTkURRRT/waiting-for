@@ -1,0 +1,41 @@
+/* Allgemeine Stile */
+body {
+  margin: 0;
+  background-color: #000; /* Schwarzer Hintergrund */
+  color: #dda0dd; /* Fliederfarbener Text */
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+}
+
+/* Countdown-Text */
+.countdown-text {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* Drehendes ASCII-Rad */
+.spinner {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  font-size: 2em;
+  animation: spin 2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
