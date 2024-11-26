@@ -17,6 +17,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
         h1 {
             font-size: 2em;
@@ -41,9 +42,54 @@
             font-size: 1em;
             margin: 1em 0;
         }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .cube {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            transform-style: preserve-3d;
+            animation: rotateCube 5s linear infinite;
+        }
+        .cube-face {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+        }
+        .front { transform: translateZ(25px); }
+        .back { transform: rotateY(180deg) translateZ(25px); }
+        .right { transform: rotateY(90deg) translateZ(25px); }
+        .left { transform: rotateY(-90deg) translateZ(25px); }
+        .top { transform: rotateX(90deg) translateZ(25px); }
+        .bottom { transform: rotateX(-90deg) translateZ(25px); }
+        
         @keyframes spin {
             0% { transform: rotate(0); }
             100% { transform: rotate(360deg); }
+        }
+        @keyframes rotateCube {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
         }
         iframe {
             position: absolute;
@@ -61,23 +107,70 @@
     </div>
 
     <div class="countdown" id="countdown">⚠️⏳🤐▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬☎️💔</div>
-
+happy bday...
     <div class="statistics" id="statistics">
         Bereits gewartet: 0 Tage, 0 Stunden <br>
         Verbleibende Zeit: 25 Tage, 0 Stunden
     </div>
 
-    <iframe src="https://kurrrtkurrrtkurrrt.github.io/waiting-for/1.mp3" autoplay loop></iframe>
+    <div class="background">
+        <div class="layer" id="layer1"></div>
+        <div class="layer" id="layer2"></div>
+        <div class="layer" id="layer3"></div>
+    </div>
+
+    <iframe src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></iframe>
 
     <script>
-        const countdownElement = document.getElementById('countdown');
-        const statisticsElement = document.getElementById('statistics');
-
         // Countdown-Daten
         const startDate = new Date("November 26, 2024 00:00:00");
-        const endDate = new Date("December 21, 2024 00:00:00");
+        const endDate = new Date("December 21, 2024 19:00:00");
         const totalDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
         const totalBars = "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"; // Startbalken
+
+        // Funktion zum Erstellen von Würfeln
+        function createCube(layer) {
+            const cube = document.createElement("div");
+            cube.className = "cube";
+
+            // Zufällige Position und Würfelfarbe
+            cube.style.top = Math.random() * 100 + "vh";
+            cube.style.left = Math.random() * 100 + "vw";
+
+            // Würfelseiten erstellen
+            ["front", "back", "right", "left", "top", "bottom"].forEach(face => {
+                const cubeFace = document.createElement("div");
+                cubeFace.className = "cube-face " + face;
+                cubeFace.innerText = "Test";
+                cube.appendChild(cubeFace);
+            });
+
+            layer.appendChild(cube);
+
+            // Zufällige Explosionseffekte
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% Chance für eine Explosion
+                    cube.style.animation = "none"; // stoppe die Rotation
+                    cube.style.opacity = 0; // blendet den Würfel aus (Explosionseffekt)
+                    setTimeout(() => {
+                        cube.remove(); // Entferne den Würfel nach der Explosion
+                    }, 500);
+                }
+            }, 1000);
+
+            return cube;
+        }
+
+        // Würfel zu den Ebenen hinzufügen
+        document.querySelectorAll(".layer").forEach(layer => {
+            for (let i = 0; i < 10; i++) {
+                createCube(layer);
+            }
+        });
+
+        // Countdown Update Funktion
+        const countdownElement = document.getElementById('countdown');
+        const statisticsElement = document.getElementById('statistics');
 
         function updateCountdown() {
             const now = new Date();
